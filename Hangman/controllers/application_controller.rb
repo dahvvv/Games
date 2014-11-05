@@ -1,4 +1,5 @@
 class ApplicationController < Sinatra::Base
+  helpers Sinatra::AuthenticationHelper
 
   enable :sessions, :method_override
 
