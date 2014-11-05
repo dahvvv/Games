@@ -8,3 +8,18 @@ ActiveRecord::Base.establish_connection({
 
 require 'sinatra/activerecord/rake'
 
+namespace :db do
+  desc "create database hangman_db"
+  task :create_hangman_db do
+    conn = PG::Connection.open()
+    conn.exec('CREATE DATABASE hangman_db;')
+    conn.close
+  end
+
+  desc "drop database hangman_db"
+  task :drop_hangman_db do
+    conn = PG::Connection.open()
+    conn.exec('DROP DATABASE hangman_db;')
+    conn.close
+  end
+end
