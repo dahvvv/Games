@@ -1,0 +1,10 @@
+require 'bundler'
+Bundler.require
+
+ActiveRecord::Base.establish_connection({
+  adapter: 'postgresql',
+  database: 'hangman_db'
+  })
+
+require 'sinatra/activerecord/rake'
+
