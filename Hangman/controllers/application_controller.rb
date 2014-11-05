@@ -21,4 +21,9 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/secret' do
+    authenticate!
+    "oooooohh!"
+  end
+
 end
