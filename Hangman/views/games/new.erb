@@ -19,4 +19,22 @@
   </tr>
 </table>
 
+<form id="O" class="<%=@game.word.upcase%>" action="/" method="get">
+  <input type="submit">
+</form>
+
 &nbsp;
+
+<script>
+  $form = $("form[action='/']")
+  $form.on('submit', function(e){
+    e.preventDefault();
+    var $guess = $(this)[0].id;
+    var $word = $(this)[0].className;
+    if ($word.indexOf($guess)>=0){
+      console.log("GOOD GUESS!")
+    } else {
+      console.log("BAD GUESS!")
+    }
+  });
+</script>
