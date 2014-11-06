@@ -26,4 +26,8 @@ class ApplicationController < Sinatra::Base
     "oooooohh!"
   end
 
+  get '/console' do
+    binding.pry
+  end
+
 end
