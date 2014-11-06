@@ -7,6 +7,9 @@ ActiveRecord::Base.establish_connection({
   })
 
 require 'sinatra/activerecord/rake'
+require_relative 'models/word'
+
+words = "Words.csv"
 
 namespace :db do
   desc "create database hangman_db"
@@ -21,5 +24,15 @@ namespace :db do
     conn = PG::Connection.open()
     conn.exec('DROP DATABASE hangman_db;')
     conn.close
+  end
+
+  desc "populate words"
+  task :populate_words do
+    CSV.foreach(words, headers: true) do |csv|
+      name = csv[0]
+      word = Word.new(name: name)
+      word.url = "http://a-z-animals.com/animals/#{word.name.downcase.gsub(' ','-')}/"
+      word.save!
+    end
   end
 end

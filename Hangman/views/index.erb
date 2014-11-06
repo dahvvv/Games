@@ -1,5 +1,23 @@
 <h1>Hangman!</h1>
 
-<form action="/games/new" method="get">
+<form action='/games/new' method="get">
   <input type="submit" value="New Game!">
 </form>
+
+<p>This is <a href="<%= Word.all.sample.url %>" target="_blank">a link</a> that should open in a new window.
+
+<script>
+  $form = $("form[action='/games/new']");
+  $form.on('submit',function(e){
+    e.preventDefault();
+    var animalsHTMLCollection = document.body.getElementsByTagName('ul');
+    var animalsList = Array.prototype.slice.call( animalsHTMLCollection );
+    $.ajax({
+      url: "http://a-z-animals.com/animals/",
+      method: "GET",
+      success: function(){
+        console.log(animalsList);
+      } //success: function(){
+    }); //$.ajax({
+  }); //$form.on('submit',function(e){
+</script>
