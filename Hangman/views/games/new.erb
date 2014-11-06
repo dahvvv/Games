@@ -1,12 +1,22 @@
-<h1>New Game</h1>
+<div class="gallows letterbox">
+  <div class="beam"></div>
+  <div class="beam_extension"></div>
+  <div class="diagonal">
+    <div id="line1"></div>
+  </div>
+  <div class="pole"></div>
+  <div class="base"></div>
+</div>
 
 <table class="blanks">
   <tr>
     <% @game.word.upcase.chars.each do |char| %>
       <td class="letter">
-        <a href="<%=@game.url%>" target="_blank"><u>&nbsp;<u/></a>
+        <a href="<%=@game.url%>" target="_blank"><u><%=char%><u/></a>
       </td>
       <td class="space"> </td>
     <% end %>
   </tr>
 </table>
+
+&nbsp;

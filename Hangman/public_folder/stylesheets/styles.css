@@ -1,6 +1,70 @@
 body{
   background-color: lightgreen;
   text-align: center;
+  margin: 0;
+}
+
+form.nav {
+  display: inline;
+}
+
+div.gallows {
+  position: relative;
+  width: 100%;
+  height: 32em;
+}
+
+div.gallows div {
+  position: absolute;
+  background-color: black;
+}
+
+div.beam {
+  bottom: 90%;
+  height: 5%;
+  width: 12%;
+  left: 44.5%;
+}
+
+div.beam_extension {
+  bottom: 90%;
+  height: 5%;
+  width: 5%;
+  left: 55%;
+  border-radius: 1em;
+}
+
+div.diagonal {
+  bottom: 90%;
+  height: 5%;
+  width: 2.5%;
+  left: 42%;
+}
+
+div #line1 {
+    width: 130%;
+    height: 100%;
+    border-bottom: 5px solid black;
+    -webkit-transform:
+        translateY(30%)
+        translateX(10%)
+        rotate(145deg); 
+    position: absolute;
+}
+
+div.pole {
+  bottom: 7%;
+  height: 83%;
+  width: 2.5%;
+  left: 42%;
+}
+
+div.base {
+  bottom: 2%;
+  height: 5%;
+  width: 12%;
+  left: 38%;
+  border-radius: 1em;
 }
 
 table.blanks {
