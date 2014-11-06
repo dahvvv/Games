@@ -2,3 +2,17 @@ body{
   background-color: lightgreen;
   text-align: center;
 }
+
+table.blanks {
+  margin: auto;
+  font-size: 5em;
+}
+
+td.space {
+  width: 0.2em;
+}
+
+.blanks a {
+  text-decoration: none;
+  color: black;
+}

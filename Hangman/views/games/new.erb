@@ -1,4 +1,12 @@
 <h1>New Game</h1>
 
-<h1>THE SECRET WORD IS <a href="<%=@game.url%>" target="_blank"><%=@game.word %></a></h1>
-
+<table class="blanks">
+  <tr>
+    <% @game.word.upcase.chars.each do |char| %>
+      <td class="letter">
+        <a href="<%=@game.url%>" target="_blank"><u>&nbsp;<u/></a>
+      </td>
+      <td class="space"> </td>
+    <% end %>
+  </tr>
+</table>
