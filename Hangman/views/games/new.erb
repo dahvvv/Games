@@ -28,10 +28,11 @@
 &nbsp;
 
 <script>
-  $form = $("form[action='/']")
+  var regAlphabet = /[A-Z]/;
+  $form = $("form[id*='Letter']");
   $form.on('submit', function(e){
     e.preventDefault();
-    var guess = $(this)[0].id;
+    var guess = $(this)[0].id.charAt(6);
     var secret_word = $(this)[0].className;
     var split = secret_word.split(guess);
     var indices = [];
