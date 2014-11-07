@@ -21,29 +21,24 @@
   </tr>
 </table>
 
-<form id="N" class="<%=@game.word.upcase%>" action="/" method="get">
-  <input type="submit">
-</form>
-
 &nbsp;
 
 <script>
-  var regAlphabet = /[A-Z]/;
   $form = $("form[id*='Letter']");
   $form.on('submit', function(e){
     e.preventDefault();
-    var guess = $(this)[0].id.charAt(6);
-    var secret_word = $(this)[0].className;
-    var split = secret_word.split(guess);
-    var indices = [];
-    $.each(split, function(index, value){
+    var userGuess = $(this)[0].id.charAt(6);
+    var secretWord = $(this)[0].className;
+    var wordSplit = secretWord.split(userGuess);
+    var whereCorrect = [];
+    $.each(wordSplit, function(index, value){
       if (index===0) {
-        indices.push(value.length)        
+        whereCorrect.push(value.length)        
       } else {
-        indices.push(value.length+indices[index-1]+1)        
+        whereCorrect.push(value.length+whereCorrect[index-1]+1)
       };
     });
-    indices.pop();
-    console.log(indices);
+    whereCorrect.pop();
+    console.log(whereCorrect);
   });
 </script>
