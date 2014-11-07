@@ -29,14 +29,16 @@
 
     $form = $("form[id*='Letter']");
     $blanks = $('a')
-    $form.on('submit', function(e){
+    $form.on('submit', function(e,hide){
       e.preventDefault();
       var userGuess = $(this)[0].id.charAt(6);
       var secretWord = $(this)[0].className;
       var wordSplit = secretWord.split(userGuess);
       var whereCorrect = [];
       var $input = (this).children[0];
-      $input.hidden=true;
+      debugger;
+      $input.innerHTML = " ";
+      $input.disabled = true;
       $.each(wordSplit, function(index, value){
         if (index===0) {
           whereCorrect.push(value.length)        
@@ -46,6 +48,10 @@
       });
       whereCorrect.pop();
       console.log(whereCorrect);
+      $.each(whereCorrect, function(index, value){
+        $blanks[value].innerHTML = userGuess
+      });
+
       var in_word = (whereCorrect.length != 0);
       var order = whereCorrect;
 
@@ -60,15 +66,14 @@
             in_word: in_word,
           }
         },
-        // success: function(data){
-        //   console.log(data);
-        //   $form = $('#Letter' + userGuess);
-        //   $input = $form.children;
-        //   $input.css("color", "green");
-        // }
       });
 
     });
+
+    $('.letter-button').on('click', function(){
+      $(this).css('visibility', 'hidden');
+      $(this).parent().disabled = true;
+    })
   });
 
 </script>

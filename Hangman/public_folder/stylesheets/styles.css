@@ -24,30 +24,11 @@ div div.letterbox {
   background-color: lightgreen;
   top: 12%;
   left: 7%;
-/*  bottom: 30%;
-  height: 60%;
-  width: 25%;
-  left: 6%;*/
+  width: 30%;
 }
 
 div.letterbox form {
   display: inline;
-}
-
-#letters_row2 {
-  top: 24%;
-}
-
-#letters_row3 {
-  top: 36%;
-}
-
-#letters_row4 {
-  top: 48%;
-}
-
-#letters_row5 {
-  top: 60%;
 }
 
 div.letterbox input {
