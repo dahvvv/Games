@@ -19,6 +19,45 @@ div.gallows div {
   background-color: black;
 }
 
+div div.letterbox {
+  position: absolute;
+  background-color: lightgreen;
+  top: 12%;
+  left: 7%;
+/*  bottom: 30%;
+  height: 60%;
+  width: 25%;
+  left: 6%;*/
+}
+
+div.letterbox form {
+  display: inline;
+}
+
+#letters_row2 {
+  top: 24%;
+}
+
+#letters_row3 {
+  top: 36%;
+}
+
+#letters_row4 {
+  top: 48%;
+}
+
+#letters_row5 {
+  top: 60%;
+}
+
+div.letterbox input {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 2.5em;
+  width: 53px;
+}
+
 div.beam {
   bottom: 90%;
   height: 5%;
@@ -41,7 +80,7 @@ div.diagonal {
   left: 42%;
 }
 
-div #line1 {
+div #diag_line {
     width: 130%;
     height: 100%;
     border-bottom: 5px solid black;

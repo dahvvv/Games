@@ -1,8 +1,10 @@
-<div class="gallows letterbox">
+<div class="gallows">
+  <%= erb :'/partials/_letterbox' %>
+
   <div class="beam"></div>
   <div class="beam_extension"></div>
   <div class="diagonal">
-    <div id="line1"></div>
+    <div id="diag_line"></div>
   </div>
   <div class="pole"></div>
   <div class="base"></div>
@@ -33,10 +35,9 @@
     var secret_word = $(this)[0].className;
     var split = secret_word.split(guess);
     var indices = [];
-    if (secret_word.charAt(0)===guess){
+    if (secret_word.charAt(0)===guess) {
       indices.push(0);
     };
-    debugger;
     $.each(split, function(index, value){
       if (index===0) {
         indices.push(value.length)        
