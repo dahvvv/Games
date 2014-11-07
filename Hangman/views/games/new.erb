@@ -19,7 +19,7 @@
   </tr>
 </table>
 
-<form id="O" class="<%=@game.word.upcase%>" action="/" method="get">
+<form id="N" class="<%=@game.word.upcase%>" action="/" method="get">
   <input type="submit">
 </form>
 
@@ -29,14 +29,14 @@
   $form = $("form[action='/']")
   $form.on('submit', function(e){
     e.preventDefault();
-    var letter = $(this)[0].id;
-    // var regLetter = new RegExp(letter, "g");
-    var word = $(this)[0].className;
-    // var result = word.match(regLetter);
-    // console.log(result)
-    var split = word.split(letter);
-    var sum = -1;
+    var guess = $(this)[0].id;
+    var secret_word = $(this)[0].className;
+    var split = secret_word.split(guess);
     var indices = [];
+    if (secret_word.charAt(0)===guess){
+      indices.push(0);
+    };
+    debugger;
     $.each(split, function(index, value){
       if (index===0) {
         indices.push(value.length)        
