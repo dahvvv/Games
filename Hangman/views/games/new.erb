@@ -12,33 +12,63 @@
 
 <table class="blanks">
   <tr>
-    <% @game.word.upcase.chars.each do |char| %>
-      <td class="letter">
-        <a href="<%=@game.url%>" target="_blank"><u><%=char%><u/></a>
+    <% @game.word.upcase.chars.each_with_index do |char,i| %>
+      <td class="<%= char != ' ' ? 'blank' : 'blank_space' %>">
+        <a href="<%=@game.url%>" target="_blank">&nbsp;</a>
       </td>
       <td class="space"> </td>
     <% end %>
   </tr>
 </table>
 
-&nbsp;
+
 
 <script>
-  $form = $("form[id*='Letter']");
-  $form.on('submit', function(e){
-    e.preventDefault();
-    var userGuess = $(this)[0].id.charAt(6);
-    var secretWord = $(this)[0].className;
-    var wordSplit = secretWord.split(userGuess);
-    var whereCorrect = [];
-    $.each(wordSplit, function(index, value){
-      if (index===0) {
-        whereCorrect.push(value.length)        
-      } else {
-        whereCorrect.push(value.length+whereCorrect[index-1]+1)
-      };
+
+  $(function(){
+
+
+    $form = $("form[id*='Letter']");
+    $blanks = $('a')
+    $form.on('submit', function(e){
+      e.preventDefault();
+      var userGuess = $(this)[0].id.charAt(6);
+      var secretWord = $(this)[0].className;
+      var wordSplit = secretWord.split(userGuess);
+      var whereCorrect = [];
+      $.each(wordSplit, function(index, value){
+        if (index===0) {
+          whereCorrect.push(value.length)        
+        } else {
+          whereCorrect.push(value.length+whereCorrect[index-1]+1)
+        };
+      });
+      whereCorrect.pop();
+      console.log(whereCorrect);
+      var in_word = (whereCorrect.length != 0);
+      var order = whereCorrect;
+
+      $.ajax({
+        method: 'POST',
+        url: '/guesses/',
+        dataType: 'json',
+        data: {
+          order: order,
+          guess: {
+            letter: userGuess,
+            in_word: in_word,
+          }
+        },
+        success: function(data){
+          console.log(data);
+        }
+      });
+
+      $.each(whereCorrect, function(index, value){
+        $blanks[value].innerHTML = userGuess
+      });
+
     });
-    whereCorrect.pop();
-    console.log(whereCorrect);
   });
+
 </script>

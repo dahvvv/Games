@@ -119,3 +119,12 @@ td.space {
   text-decoration: none;
   color: black;
 }
+
+td.blank {
+  border-bottom: 5px solid black;
+}
+
+.blanks a {
+  display: inline-block;
+  width: 75px;
+}
