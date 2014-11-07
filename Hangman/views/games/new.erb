@@ -36,9 +36,6 @@
     var secret_word = $(this)[0].className;
     var split = secret_word.split(guess);
     var indices = [];
-    if (secret_word.charAt(0)===guess) {
-      indices.push(0);
-    };
     $.each(split, function(index, value){
       if (index===0) {
         indices.push(value.length)        
