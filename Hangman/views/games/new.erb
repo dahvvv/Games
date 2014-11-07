@@ -27,7 +27,6 @@
 
   $(function(){
 
-
     $form = $("form[id*='Letter']");
     $blanks = $('a')
     $form.on('submit', function(e){
@@ -36,6 +35,8 @@
       var secretWord = $(this)[0].className;
       var wordSplit = secretWord.split(userGuess);
       var whereCorrect = [];
+      var $input = (this).children[0];
+      $input.hidden=true;
       $.each(wordSplit, function(index, value){
         if (index===0) {
           whereCorrect.push(value.length)        
@@ -59,13 +60,12 @@
             in_word: in_word,
           }
         },
-        success: function(data){
-          console.log(data);
-        }
-      });
-
-      $.each(whereCorrect, function(index, value){
-        $blanks[value].innerHTML = userGuess
+        // success: function(data){
+        //   console.log(data);
+        //   $form = $('#Letter' + userGuess);
+        //   $input = $form.children;
+        //   $input.css("color", "green");
+        // }
       });
 
     });
