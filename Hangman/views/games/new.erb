@@ -29,12 +29,22 @@
   $form = $("form[action='/']")
   $form.on('submit', function(e){
     e.preventDefault();
-    var $guess = $(this)[0].id;
-    var $word = $(this)[0].className;
-    if ($word.indexOf($guess)>=0){
-      console.log("GOOD GUESS!")
-    } else {
-      console.log("BAD GUESS!")
-    }
+    var letter = $(this)[0].id;
+    // var regLetter = new RegExp(letter, "g");
+    var word = $(this)[0].className;
+    // var result = word.match(regLetter);
+    // console.log(result)
+    var split = word.split(letter);
+    var sum = -1;
+    var indices = [];
+    $.each(split, function(index, value){
+      if (index===0) {
+        indices.push(value.length)        
+      } else {
+        indices.push(value.length+indices[index-1]+1)        
+      };
+    });
+    indices.pop();
+    console.log(indices);
   });
 </script>
