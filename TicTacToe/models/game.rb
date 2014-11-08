@@ -4,7 +4,3 @@ class Game < ActiveRecord::Base
   has_many :boardspaces
 
 end
-
-# winner
-# gamestate
-# gamerecord

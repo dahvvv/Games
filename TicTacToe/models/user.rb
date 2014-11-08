@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     self.password_hash = @password
   end
 
-  def id_by_username(username)
+  def self.id_by_username(username)
     self.find_by(username: username).id
   end
 
