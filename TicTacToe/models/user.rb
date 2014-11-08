@@ -18,24 +18,48 @@ class User < ActiveRecord::Base
   end
 
   def start_game
-    game = Game.create
-    9.times do |i|
-      Boardspace.create({game_id: game.id, position: i})
+    if self.games.count > 0
+      puts "you can't run more than one game at a time!"
+    else
+      game = Game.create
+      9.times do |i|
+        Boardspace.create({game_id: game.id, position: i})
+      end
+      puts "Do you want to go first?  true/false"
+      answer = gets.chomp
+      Player.create({user_id: self.id, game_id: game.id, first: answer})
     end
-    Player.create({user_id: self.id, game_id: game.id})
+  end
+
+  def delete_game(game_id)
+    game = Game.find(game_id)
+    game.destroy
   end
 
   def join_game(other_username)
-    if game = Game.find(User.id_by_username(other_username))
-      if game.users.count == 1
-        if game.users[0].id != self.id
-          player = Player.create({user_id: self.id, game_id: game.id})
+    if self.games.count == 0
+      if opponent_user = User.find_by(username: other_username)
+        if opponent_user.games.count == 1
+          game = opponent_user.games[0]
+          if game.players.count == 1
+            if game.users[0].id != self.id
+              opponent = game.players[0]
+              player = Player.create({user_id: self.id, game_id: game.id, first: (opponent.first == true ? false : true)})
+              game.start
+            else
+              return "You can't play against yourself!"
+            end
+          else
+            return "That game already has two players!"
+          end
         else
-          return "You can't play against yourself!"
+          return "That user doesn't have an open game!"
         end
       else
-        return "That game already has two players!"
+        return "There is no user registered under that name!"
       end
+    else
+      return "You can't run more than one game at a time!"
     end
   end
 
