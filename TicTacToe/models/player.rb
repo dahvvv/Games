@@ -3,6 +3,3 @@ class Player < ActiveRecord::Base
   belongs_to :game
 
 end
-
-# user_id
-# game_id
