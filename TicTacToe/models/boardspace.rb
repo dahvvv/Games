@@ -3,13 +3,11 @@ class Boardspace < ActiveRecord::Base
 
   def get_selected(username)
     if self.status == "empty"
-      self.status = User.id_by_username(username)
+      self.status = username
+      self.save!
     else
       return "You can't select this space, it's already occupied!"
     end
   end
 
 end
-
-# status (empty, player1, player2, default: empty)
-# position

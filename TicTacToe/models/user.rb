@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
 
   def start_game
     game = Game.create
+    9.times do |i|
+      Boardspace.create({game_id: game.id, position: i})
+    end
     Player.create({user_id: self.id, game_id: game.id})
   end
 
