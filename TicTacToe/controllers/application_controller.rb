@@ -1,4 +1,5 @@
 class ApplicationController < Sinatra::Base
+  helpers Sinatra::AuthenticationHelper
 
   enable :sessions, :method_override
 
@@ -22,6 +23,11 @@ class ApplicationController < Sinatra::Base
 
   get '/console' do
     binding.pry
+  end
+
+  get '/auth' do
+    authenticate!
+    "ooooooooooooo!"
   end
 
 end
