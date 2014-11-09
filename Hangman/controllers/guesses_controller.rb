@@ -10,7 +10,9 @@ class GuessesController < ApplicationController
       guess.order = [].to_s
     end
     guess.save!
-    {letter: guess.letter, in_word: guess.in_word, order: order_array, id: guess.id}.to_json
+    game = Game.find(params[:guess][:game_id])
+    wrong_count = game.guesses.where("in_word=false").count
+    {letter: guess.letter, in_word: guess.in_word, order: order_array, id: guess.id, wrong_count: wrong_count}.to_json
   end
 
 end

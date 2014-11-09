@@ -69,6 +69,13 @@
           game_id: gameID
         }
       },
+      success: function(json){
+        var wrongCount = json.wrong_count
+        var inWord = json.in_word
+        if (inWord===false) {
+          alert("The number of wrong guesses is " + wrongCount)
+        }
+      }
     });
   }
 
@@ -96,10 +103,6 @@
       $.each(whereCorrect, function(index, value){
         $blanks[value].innerHTML = userGuess;
       });
-
-      // if (whereCorrect.length === 0){
-        
-      // }
 
       sendGameState(whereCorrect, userGuess, gameID);
 
