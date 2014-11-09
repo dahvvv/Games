@@ -1,7 +1,7 @@
 <div class="letterbox">
   <% alphabet = ("A".."Z").to_a %>
   <% alphabet.each do |letter| %>
-    <form id="Letter<%= letter %>" class="<%=@game.word.upcase%>">
+    <form id="Letter<%= letter %><%= @game.id %>" class="<%=@game.word.upcase%>">
       <input class="letter-button" type="submit" value="<%= letter %>">
     </form>
   <% end %>

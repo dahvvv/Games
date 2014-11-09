@@ -32,7 +32,13 @@ namespace :db do
       name = csv[0]
       word = Word.new(name: name)
       word.url = "http://a-z-animals.com/animals/#{word.name.downcase.gsub(' ','-')}/"
+      if word.url == "http://a-z-animals.com/animals/finnish-spitz/"
+        word.url = "http://a-z-animals.com/animals/finnish-sptiz/"
+      elsif word.url == "http://a-z-animals.com/animals/african-forest-elephant/"
+        word.url = "http://a-z-animals.com/animals/african-elephant/"
+      end
       word.save!
     end
   end
+
 end

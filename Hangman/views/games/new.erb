@@ -2,78 +2,110 @@
   <%= erb :'/partials/_letterbox' %>
 
   <div class="beam"></div>
+  <div class="rope"></div>
+  <div class="noose"></div>
+  <div class="noosehole"></div>
   <div class="beam_extension"></div>
   <div class="diagonal">
     <div id="diag_line"></div>
   </div>
   <div class="pole"></div>
   <div class="base"></div>
+
+  <div class="hangedman">
+    
+  </div>
 </div>
 
-<table class="blanks">
-  <tr>
-    <% @game.word.upcase.chars.each_with_index do |char,i| %>
-      <td class="<%= char != ' ' ? 'blank' : 'blank_space' %>">
-        <a href="<%=@game.url%>" target="_blank">&nbsp;</a>
-      </td>
-      <td class="space"> </td>
-    <% end %>
-  </tr>
-</table>
-
-
+<div class="blanks_container">
+  <table class="blanks">
+    <tr>
+      <% @game.word.upcase.chars.each_with_index do |char,i| %>
+        <td class="<%= char != ' ' ? 'blank' : 'blank_space' %>">
+          <a href="<%=@game.url%>" target="_blank">&nbsp;</a>
+        </td>
+        <td class="space"> </td>
+        <% if char == ' ' %>
+          <br>
+        <% end %>
+      <% end %>
+    </tr>
+  </table>
+</div>
 
 <script>
 
+
+
+  function hideLetter(e){
+    $(this).css('visibility', 'hidden');
+    $(this).parent().disabled = true;
+  }
+
+  function letterIndexes(wordSplit){
+    var whereCorrect = [];
+    $.each(wordSplit, function(index, value){
+      if (index===0) {
+        whereCorrect.push(value.length)        
+      } else {
+        whereCorrect.push(value.length+whereCorrect[index-1]+1)
+      };
+    });
+    whereCorrect.pop();
+    return whereCorrect;
+  }
+
+  function sendGameState(whereCorrect, userGuess, gameID){
+    var in_word = (whereCorrect.length != 0);
+    $.ajax({
+      method: 'POST',
+      url: '/guesses/',
+      dataType: 'json',
+      data: {
+        order: whereCorrect,
+        guess: {
+          letter: userGuess,
+          in_word: in_word,
+          game_id: gameID
+        }
+      },
+    });
+  }
+
+
+
+
   $(function(){
 
-    $form = $("form[id*='Letter']");
-    $blanks = $('a')
+    var $form = $("form[id*='Letter']");
+    var $blanks = $('a')
+    var whereCorrect = []
+
     $form.on('submit', function(e,hide){
       e.preventDefault();
       var userGuess = $(this)[0].id.charAt(6);
+      var gameID = $(this)[0].id.substr(7,($(this)[0].id.length - 1))
       var secretWord = $(this)[0].className;
       var wordSplit = secretWord.split(userGuess);
-      var whereCorrect = [];
+
       var $input = (this).children[0];
-      debugger;
       $input.innerHTML = " ";
       $input.disabled = true;
-      $.each(wordSplit, function(index, value){
-        if (index===0) {
-          whereCorrect.push(value.length)        
-        } else {
-          whereCorrect.push(value.length+whereCorrect[index-1]+1)
-        };
-      });
-      whereCorrect.pop();
-      console.log(whereCorrect);
+      var whereCorrect = letterIndexes(wordSplit);
+
       $.each(whereCorrect, function(index, value){
-        $blanks[value].innerHTML = userGuess
+        $blanks[value].innerHTML = userGuess;
       });
 
-      var in_word = (whereCorrect.length != 0);
-      var order = whereCorrect;
+      // if (whereCorrect.length === 0){
+        
+      // }
 
-      $.ajax({
-        method: 'POST',
-        url: '/guesses/',
-        dataType: 'json',
-        data: {
-          order: order,
-          guess: {
-            letter: userGuess,
-            in_word: in_word,
-          }
-        },
-      });
+      sendGameState(whereCorrect, userGuess, gameID);
 
     });
 
-    $('.letter-button').on('click', function(){
-      $(this).css('visibility', 'hidden');
-      $(this).parent().disabled = true;
-    })
+    $('.letter-button').on('click', hideLetter)
   });
 
 </script>

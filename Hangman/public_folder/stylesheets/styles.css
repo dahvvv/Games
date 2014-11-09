@@ -46,6 +46,36 @@ div.beam {
   left: 44.5%;
 }
 
+div div.rope {
+  background-color: tan;
+  bottom: 80%;
+  height: 10%;
+  width: 0.5%;
+  left: 58.25%;
+}
+
+div div.noose {
+  background-color: tan;
+  bottom: 66%;
+  height: 75px;
+  width: 50px;
+  left: 56.6%;
+  -moz-border-radius: 50px / 75px;
+  -webkit-border-radius: 50px / 75px;
+  border-radius: 50px / 75px;
+}
+
+div div.noosehole {
+  background-color: lightgreen;
+  bottom: 68%;
+  height: 57px;
+  width: 38px;
+  left: 57%;
+  -moz-border-radius: 50px / 57px;
+  -webkit-border-radius: 50px / 57px;
+  border-radius: 50px / 57px;  
+}
+
 div.beam_extension {
   bottom: 90%;
   height: 5%;
@@ -89,7 +119,7 @@ div.base {
 
 table.blanks {
   margin: auto;
-  font-size: 5em;
+  font-size: 4em;
 }
 
 td.space {
@@ -107,5 +137,5 @@ td.blank {
 
 .blanks a {
   display: inline-block;
-  width: 75px;
+  width: 60px;
 }
