@@ -151,6 +151,53 @@ div div.wrongcount1 {
   background-color: transparent;
 }
 
+div.wrongcount2 {
+  bottom: 58%;
+  height: 3%;
+  width: 0.5%;
+  left: 58.25%;
+}
+
+div.wrongcount3 {
+  bottom: 64%;
+  height: 1%;
+  width: 12%;
+  left: 58.1%;
+  -webkit-transform: rotate(155deg);
+}
+
+div.wrongcount4 {
+  bottom: 61%;
+  height: 1%;
+  width: 12%;
+  left: 46.5%;
+  -webkit-transform: rotate(11deg);
+}
+
+div.wrongcount5 {
+  bottom: 46%;
+  height: 1%;
+  width: 10%;
+  left: 54.8%;
+  -webkit-transform: rotate(75deg);
+}
+
+div.wrongcount6 {
+  bottom: 22.7%;
+  height: 1%;
+  width: 16%;
+  left: 59.6%;
+  -webkit-transform: rotate(35deg);
+}
+
+div.wrongcount7 {
+  bottom: 38%;
+  height: 1%;
+  width: 16%;
+  left: 61%;
+  -webkit-transform: rotate(169deg);
+}
+
 table.blanks {
   margin: auto;
   font-size: 4em;
