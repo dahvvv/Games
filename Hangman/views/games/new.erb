@@ -3,18 +3,19 @@
 
   <div class="beam"></div>
   <div class="rope"></div>
-  <div class="noose"></div>
-  <div class="noosehole"></div>
+  <div class="noose wrongcount"></div>
+  <div class="noosehole wrongcount"></div>
   <div class="beam_extension"></div>
   <div class="diagonal">
     <div id="diag_line"></div>
   </div>
   <div class="pole"></div>
   <div class="base"></div>
-
-  <div class="hangedman">
-    
-  </div>
+  <div class="lefteye"></div>
+  <div class="leftbrow"></div>
+  <div class="righteye"></div>
+  <div class="rightbrow"></div>
+  <div class="mouth"></div>
 </div>
 
 <div class="blanks_container">
@@ -74,9 +75,27 @@
         var inWord = json.in_word
         if (inWord===false) {
           alert("The number of wrong guesses is " + wrongCount)
+        };
+        if (wrongCount===1){
+          changeImage(wrongCount);          
+        };
+        if (wrongCount>1){
+          addImage(wrongCount);
         }
       }
     });
+  }
+
+  function changeImage(wrongCount){
+    var $div = $("div[class*='wrongcount']");
+    $div[0].className = ("wrongcount" + wrongCount);
+  }
+
+  function addImage(wrongCount){
+    var $gallows = $(".gallows");
+    var $div = $("<div>");
+    $div.addClass("wrongcount" + wrongCount);
+    $gallows.append($div);
   }
 
 
