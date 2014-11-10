@@ -11,6 +11,7 @@
   </div>
   <div class="pole"></div>
   <div class="base"></div>
+
 </div>
 
 <div class="blanks_container">
@@ -111,7 +112,11 @@
   function loseGame(){
     $.each($formLetter, function(index, value){
       $(value.firstElementChild).css("visibility", "hidden")
-    })
+    });
+    var $h1 = $("<h1>");
+    $h1.addClass("you_lose");
+    $h1.text("YOU LOSE :(");
+    $('body').append($h1);
   }
 
 

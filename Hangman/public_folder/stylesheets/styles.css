@@ -8,6 +8,15 @@ form.nav {
   display: inline;
 }
 
+h1.you_lose {
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  top: 25%;
+  font-size: 12em;
+  color: red;
+}
+
 div.gallows {
   position: relative;
   width: 100%;
