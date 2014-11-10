@@ -31,4 +31,40 @@ ul {
   height: 32%;
   width: 32%;
   display: inline-block;
+  position: relative;
+}
+
+div .O {
+  position: absolute;
+  top: 10%;
+  height: 70%;
+  width: 70%;
+  left: 10%;
+  border-radius: 50%;
+  border: 8px solid black;
+  background: transparent;
+}
+
+div .XL {
+  position: absolute;
+  top: 0%;
+  height: 90%;
+  width: 0%;
+  left: 45%;
+  border-radius: 3em;
+  border: 8px solid black;
+  background: transparent;
+  -webkit-transform: rotate(45deg);
+}
+
+div .XR {
+  position: absolute;
+  top: 0%;
+  height: 90%;
+  width: 0%;
+  left: 45%;
+  border-radius: 3em;
+  border: 8px solid black;
+  background: transparent;
+  -webkit-transform: rotate(135deg);
 }

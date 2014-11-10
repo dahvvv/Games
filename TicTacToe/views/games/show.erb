@@ -3,6 +3,7 @@
 
 <div class="board">
   <% @game.boardspaces.each do |boardspace| %>
-    <div class="boardspace" id="<%= boardspace.position %>"></div>
+    <div class="boardspace" id="<%= boardspace.position %>">
+    </div>
   <% end %>
 </div>
