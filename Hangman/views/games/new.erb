@@ -81,6 +81,9 @@
         if (won==false){
           loseGame();
         }
+        if (won==true){
+          winGame();
+        }
       }
     });
   }
@@ -117,6 +120,10 @@
     $h1.addClass("you_lose");
     $h1.text("YOU LOSE :(");
     $('body').append($h1);
+  }
+
+  function winGame(){
+    alert("you won!")
   }
 
 
