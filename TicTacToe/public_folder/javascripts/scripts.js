@@ -59,6 +59,7 @@ $(function(){
   var $newGame = $('.new_game');
   var $firstOrSecond = $('.first_or_second');
   var $joinGame = $('.join_game');
+  var $resumeGame = $('.resume_game');
 
   $newGame.on('submit', function(e){
     e.preventDefault();

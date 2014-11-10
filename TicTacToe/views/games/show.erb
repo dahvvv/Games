@@ -1,1 +1,7 @@
 <h1>HERE IS DA GAME!  GAME NUMBER <%= @game.id %>!!</h1>
+
+<div class="board">
+  <% @game.boardspaces.each do |boardspace| %>
+    <div class="boardspace" id="<%= boardspace.position %>"></div>
+  <% end %>
+</div>

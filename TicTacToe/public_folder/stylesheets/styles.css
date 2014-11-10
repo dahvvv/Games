@@ -3,6 +3,10 @@ body {
   text-align: center;
 }
 
+.nav {
+  display: inline;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -14,6 +18,17 @@ ul {
   font-size: 2em;
 }
 
-form.nav {
-  display: inline;
+.board {
+  position: relative;
+  height: 450px;
+  width: 450px;
+  margin: 0 auto;
+}
+
+.boardspace {
+  background: transparent;
+  border: 1px solid black;
+  height: 32%;
+  width: 32%;
+  display: inline-block;
 }
