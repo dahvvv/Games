@@ -17,7 +17,7 @@ class GuessesController < ApplicationController
     wrong_count = game.guesses.where("in_word=false").count
     guessed = game.all_necessary_letters.map { |necessary_letter| game.all_guessed_letters.include?(necessary_letter) }
 
-    if wrong_count == 7
+    if wrong_count == 10
       game.won = false
       game.save!
     end

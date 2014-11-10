@@ -207,6 +207,34 @@ div.wrongcount7 {
   -webkit-transform: rotate(169deg);
 }
 
+div div.wrongcount8 {
+  bottom: 70%;
+  height: 1.1%;
+  width: 1%;
+  left: 56%;
+  border-radius: 50%;
+  background: pink;
+}
+
+div div.wrongcount9 {
+  bottom: 60.8%;
+  height: 6%;
+  width: 0.5%;
+  left: 57%;
+  -webkit-transform: rotate(13deg);
+  background: red;
+}
+
+div div.wrongcount10 {
+  bottom: 82%;
+  height: 4%;
+  width: 7%;
+  left: 55%;
+  border-radius: 50%;
+  background: transparent;
+  border: 6px solid yellow;
+}
+
 table.blanks {
   margin: auto;
   font-size: 4em;
