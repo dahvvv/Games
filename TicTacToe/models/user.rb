@@ -39,4 +39,8 @@ class User < ActiveRecord::Base
     space = Boardspace.find_by({position: position, game_id: game_id})
     space.get_selected(self.username)
   end
+
+  def x_or_o
+    self.players[0].first == true ? "X" : "O"
+  end
 end

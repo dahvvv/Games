@@ -1,4 +1,5 @@
-<h1>HERE IS DA GAME!  GAME NUMBER <%= @game.id %>!!</h1>
+<h1>Hi <%= current_user.username %>!  Here's your game!!</h1>
+<h2>You are <%= current_user.x_or_o %></h2>
 
 <div class="board">
   <% @game.boardspaces.each do |boardspace| %>

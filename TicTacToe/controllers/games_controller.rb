@@ -9,6 +9,7 @@ class GamesController < ApplicationController
   end
 
   get '/first_or_second' do
+    authenticate!
     erb :'/games/new'
   end
 
@@ -29,6 +30,7 @@ class GamesController < ApplicationController
   end
 
   get '/:id' do
+    authenticate!
     @game = Game.find(params[:id])
     erb :'/games/show'
   end
