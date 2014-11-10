@@ -1,9 +1,9 @@
 <h1>Hi <%= current_user.username %>!  Here's your game!!</h1>
-<h2>You are <%= current_user.x_or_o %></h2>
+<h2>You are <%= current_user.x_or_o %>, and <%= (current_user.my_turn == true) ? "it's your turn!" : "it is not your turn." %></h2>
 
 <div class="board">
   <% @game.boardspaces.each do |boardspace| %>
-    <div class="boardspace" id="<%= boardspace.position %>">
+    <div class="boardspace myturn<%=current_user.my_turn%>" id="<%= boardspace.position %>">
     </div>
   <% end %>
 </div>

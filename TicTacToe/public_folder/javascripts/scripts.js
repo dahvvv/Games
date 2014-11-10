@@ -54,6 +54,24 @@ function joinGame(gameID){
   });
 }
 
+function selectSpace(position, myTurn){
+  var position = position;
+  var myTurn = myTurn;
+  $.ajax({
+    method: "PATCH",
+    url: "/boardspaces/",
+    dataType: "json",
+    data: {position: position, my_turn: myTurn},
+    success: function(json){
+      fillInBoardspace();
+    }
+  });
+}
+
+function fillInBoardspace(){
+  alert("holy shit!")
+}
+
 $(function(){
 
   var $newGame = $('.new_game');
@@ -80,10 +98,12 @@ $(function(){
     var starterOrJoiner = "joiner";
     var gameID = (this).id;
     multipleGameCheck(starterOrJoiner, gameID);
-  })
+  });
 
   $boardspaces.on('click', function(e){
-    alert("hi");
-  })
+    var position = (this).id;
+    var myTurn = (this).classList[1].slice(6,((this).classList[1].length));
+    selectSpace(position, myTurn);
+  });
 
 })
