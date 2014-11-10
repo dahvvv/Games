@@ -30,31 +30,9 @@ class User < ActiveRecord::Base
     game.destroy
   end
 
-  def join_game(other_username)
-    if self.games.count == 0
-      if opponent_user = User.find_by(username: other_username)
-        if opponent_user.games.count == 1
-          game = opponent_user.games[0]
-          if game.players.count == 1
-            if game.users[0].id != self.id
-              opponent_player = game.players[0]
-              player = Player.create({user_id: self.id, game_id: game.id, first: (opponent_player.first == true ? false : true)})
-              game.start
-            else
-              return "You can't play against yourself!"
-            end
-          else
-            return "That game already has two players!"
-          end
-        else
-          return "That user doesn't have an open game!"
-        end
-      else
-        return "There is no user registered under that name!"
-      end
-    else
-      return "You can't play more than one game at a time!"
-    end
+  def join_game(game_id)
+    opponent = Player.find_by(game_id: game_id)
+    player = Player.create({user_id: self.id, game_id: game_id, first: (opponent.first == true ? false : true)})
   end
 
   def select_boardspace(position, game_id)

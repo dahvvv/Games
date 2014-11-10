@@ -1,16 +1,23 @@
 console.log(":D")
 
-function multipleGameCheck(){
+function multipleGameCheck(starterOrJoiner, gameID){
+  var starterOrJoiner = starterOrJoiner
+  var gameID = gameID
   $.ajax({
     method: "GET",
     url: "/games/multiple_game_check",
     dataType: "json",
+    data: {starter_or_joiner: starterOrJoiner, game_id: gameID},
     success: function(json){
       var check = json.check;
+      var starterOrJoiner = json.starter_or_joiner;
+      var gameID = json.game_id;
       if (check==="fail"){
         alert("You already have an active game!")
-      } else {
+      } else if (starterOrJoiner==="starter") {
         window.location.href="/games/first_or_second";
+      } else {
+        joinGame(gameID);
       };
     }
   });
@@ -33,14 +40,31 @@ function startGame(first){
   });
 }
 
+function joinGame(gameID){
+  var gameID = gameID;
+  $.ajax({
+    method: "POST",
+    url: "/players/",
+    dataType: "json",
+    data: {game_id: gameID},
+    success: function(json){
+      var gameID = json.game_id;
+      window.location.href="/games/" + gameID;
+    }
+  });
+}
+
 $(function(){
 
   var $newGame = $('.new_game');
-  var $firstOrSecond = $('.first_or_second')
+  var $firstOrSecond = $('.first_or_second');
+  var $joinGame = $('.join_game');
 
   $newGame.on('submit', function(e){
     e.preventDefault();
-    multipleGameCheck();
+    var starterOrJoiner = "starter";
+    var game_id = "irrelevant";
+    multipleGameCheck(starterOrJoiner, game_id);
   });
 
   $firstOrSecond.on('submit', function(e){
@@ -48,5 +72,12 @@ $(function(){
     var first = $('input[name="first"]:checked').val();
     startGame(first);
   });
+
+  $joinGame.on('click', function(e){
+    e.preventDefault();
+    var starterOrJoiner = "joiner";
+    var gameID = (this).id;
+    multipleGameCheck(starterOrJoiner, gameID);
+  })
 
 })

@@ -2,15 +2,25 @@ class GamesController < ApplicationController
 
   get '/multiple_game_check' do
     content_type :json
+    starter_or_joiner = params[:starter_or_joiner]
     check = ((current_user.games.count > 0) ? "fail" : "pass")
-    {check: check}.to_json
+    game_id = (starter_or_joiner == "joiner" ? params[:game_id] : "irrelevant")
+    {check: check, starter_or_joiner: starter_or_joiner, game_id: game_id}.to_json
   end
 
   get '/first_or_second' do
     erb :'/games/new'
   end
 
-  get '/new' do
+  get '/join' do
+    authenticate!
+    @open_games = Game.all.select { |game| game.players.count==1 }
+    erb :'/games/join'
+  end
+
+  get '/:id' do
+    @game = Game.find(params[:id])
+    erb :'/games/show'
   end
 
   post '/' do
