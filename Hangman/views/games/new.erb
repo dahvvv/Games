@@ -32,6 +32,7 @@
 <script>
 
   var $gallows = $(".gallows");
+  var $formLetter = $("form[id*='Letter']");
 
   function hideLetter(e){
     $(this).css('visibility', 'hidden');
@@ -68,14 +69,16 @@
       success: function(json){
         var wrongCount = json.wrong_count
         var inWord = json.in_word
-        if (inWord===false) {
-          alert("The number of wrong guesses is " + wrongCount)
-        };
+        var won = json.won
+
         if (wrongCount===1){
           changeNooseIntoFace(wrongCount);          
         };
         if (wrongCount>1){
-          addImage(wrongCount);
+          addBodyPart(wrongCount);
+        }
+        if (won==false){
+          loseGame();
         }
       }
     });
@@ -99,10 +102,16 @@
     $gallows.append($mouth);
   }
 
-  function addImage(wrongCount){
+  function addBodyPart(wrongCount){
     var $div = $("<div>");
     $div.addClass("wrongcount" + wrongCount);
     $gallows.append($div);
+  }
+
+  function loseGame(){
+    $.each($formLetter, function(index, value){
+      $(value.firstElementChild).css("visibility", "hidden")
+    })
   }
 
 
@@ -110,11 +119,10 @@
 
   $(function(){
 
-    var $form = $("form[id*='Letter']");
     var $blanks = $('a')
     var whereCorrect = []
 
-    $form.on('submit', function(e,hide){
+    $formLetter.on('submit', function(e,hide){
       e.preventDefault();
       var userGuess = $(this)[0].id.charAt(6);
       var gameID = $(this)[0].id.substr(7,($(this)[0].id.length - 1))
