@@ -17,6 +17,17 @@ h1.you_lose {
   color: red;
 }
 
+button.play_again {
+  background: transparent;
+  border: none;
+  font-size: 2.5em;
+  color: blue;
+  font-weight: bold;
+  position: absolute;
+  left: 12%;
+  top: 58%;
+}
+
 div.gallows {
   position: relative;
   width: 100%;

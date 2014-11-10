@@ -120,6 +120,9 @@
     $h1.addClass("you_lose");
     $h1.text("YOU LOSE :(");
     $('body').append($h1);
+    
+    playAgainButton();
+
   }
 
   function winGame(){
@@ -130,6 +133,19 @@
     $h1.addClass("you_lose");
     $h1.text("YOU WIN!!!!");
     $('body').append($h1);
+
+    playAgainButton();
+
+  }
+
+  function playAgainButton(){
+    var $button = $("<button>");
+    var $a = $("<a>");
+    $a.text("PLAY AGAIN?");
+    $a.attr("href", "/games/new");
+    $button.addClass("play_again");
+    $button.append($a);
+    $('body').append($button);
   }
 
 
