@@ -18,17 +18,13 @@ class User < ActiveRecord::Base
   end
 
   def start_game
-    if self.games.count > 0
-      puts "You can't play more than one game at a time!"
-    else
-      game = Game.create
-      9.times do |i|
-        Boardspace.create({game_id: game.id, position: i})
-      end
-      puts "Do you want to go first?  true/false"
-      answer = gets.chomp
-      Player.create({user_id: self.id, game_id: game.id, first: answer})
+    game = Game.create
+    9.times do |i|
+      Boardspace.create({game_id: game.id, position: i})
     end
+    puts "Do you want to go first?  true/false"
+    answer = gets.chomp
+    Player.create({user_id: self.id, game_id: game.id, first: answer})
   end
 
   def delete_game(game_id)
