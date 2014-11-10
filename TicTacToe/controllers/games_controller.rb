@@ -43,4 +43,10 @@ class GamesController < ApplicationController
     {username: username}.to_json
   end
 
+  patch '/' do
+    content_type :json
+    user = User.find(params[:user_id])
+    {my_turn: my_turn}.to_json
+  end
+
 end

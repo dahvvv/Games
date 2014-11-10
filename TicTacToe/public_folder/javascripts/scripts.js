@@ -1,5 +1,7 @@
 console.log(":D")
 
+var myTurn = ""
+
 function multipleGameCheck(starterOrJoiner, gameID){
   var starterOrJoiner = starterOrJoiner
   var gameID = gameID
@@ -54,7 +56,7 @@ function joinGame(gameID){
   });
 }
 
-function selectSpace(position, myTurn){
+function selectBoardspace(position, myTurn){
   var position = position;
   var myTurn = myTurn;
   $.ajax({
@@ -63,13 +65,47 @@ function selectSpace(position, myTurn){
     dataType: "json",
     data: {position: position, my_turn: myTurn},
     success: function(json){
-      fillInBoardspace();
+      var position = json.position;
+      var xOrO = json.x_or_o;
+      var myTurn = json.my_turn;
+      fillInBoardspace(position, xOrO);
+      updateTurn(myTurn);
     }
   });
 }
 
-function fillInBoardspace(){
-  alert("holy shit!")
+function fillInBoardspace(position, xOrO){
+  var $selectedSpace = $('#' + position);
+  var $xOrO = xOrO;
+  var $div = $("<div>");
+  if ($xOrO==="O"){
+    $div.addClass("O");
+    $selectedSpace.append($div);
+  } else {
+    $div.addClass("XL");
+    $selectedSpace.append($div);
+    var $divR = $("<div>");
+    $divR.addClass("XR");
+    $selectedSpace.append($divR);
+  }
+}
+
+function updateTurn(myTurn){
+  var myTurn = myTurn;
+  // $.ajax({
+  //   method: "PATCH",
+  //   url: "/games/",
+  //   dataType: "json",
+  //   success: function(json){
+  //     var $myTurn = json.my_turn;
+      var $span = $('span.whose_turn');
+      if (myTurn==="true"){
+        $span.innerHTML="it's your turn!"
+      } else {
+        $span[0].innerHTML="it is not your turn."
+      }
+    // }
+  // });
 }
 
 $(function(){
@@ -101,9 +137,17 @@ $(function(){
   });
 
   $boardspaces.on('click', function(e){
+    var $boardspaces = $('.boardspace');
     var position = (this).id;
     var myTurn = (this).classList[1].slice(6,((this).classList[1].length));
-    selectSpace(position, myTurn);
+    if (myTurn==="true"){
+      selectBoardspace(position, myTurn);
+      $.each($boardspaces, function(index, value){
+        value.className = "boardspace myturnfalse"
+      });
+    } else {
+      return false;
+    }
   });
 
 })
