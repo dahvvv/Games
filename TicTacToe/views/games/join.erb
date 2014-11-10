@@ -1,16 +1,21 @@
-<% if @open_games.count > 0 %>
-  <h2><%= @open_games.count %> users currently have games open!</h2>
-  <h3>Click on a username to join their game.</h3>
+<% if current_user.games.count == 0 %>
+  <% if @open_games.count > 0 %>
+    <h2><%= @open_games.count %> users currently have games open!</h2>
+    <h3>Click on a username to join their game.</h3>
 
-  <ul class="open_games">
-    <% @open_games.each do |game| %>
-      <li>
-        <a href="/games/show" class="join_game" id="<%= game.id %>"><%=game.users[0].username%></a>
-      </li>
-    <% end %>
-  </ul>
+    <ul class="open_games">
+      <% @open_games.each do |game| %>
+        <li>
+          <a href="/games/join/<%=game.id%>" class="join_game"><%=game.users[0].username%></a>
+        </li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <h2>There aren't currently any games open!  Why don't you <a href="/games/new" class="new_game">start one</a>?</h2>
+  <% end %>
 
 <% else %>
-  <h2>There aren't currently any games open!  Why don't you <a href="/games/new" class="new_game">start one</a>?</h2>
+  <a href="/">You already have an open game!</a>
 
 <% end %>

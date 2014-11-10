@@ -9,6 +9,5 @@ end
 map('/users'){ run UsersController }
 map('/sessions'){ run SessionsController }
 map('/games'){ run GamesController }
-map('/players'){ run PlayersController }
 map('/boardspaces'){ run BoardspacesController }
 map('/'){ run ApplicationController }

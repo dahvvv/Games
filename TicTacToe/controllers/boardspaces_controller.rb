@@ -7,8 +7,8 @@ class BoardspacesController < ApplicationController
     game_id = current_user.games[0].id
     boardspace = Boardspace.find_by(game_id: game_id)
     boardspace.get_selected(user_id)
-    x_or_o = current_user.x_or_o
-    {position: position, x_or_o: x_or_o, my_turn: current_user.my_turn}.to_json
+    x_o_from_status = boardspace.x_o_from_status
+    {position: position, xOFromStatus: x_o_from_status}.to_json
   end
 
 end

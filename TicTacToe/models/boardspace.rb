@@ -8,4 +8,12 @@ class Boardspace < ActiveRecord::Base
     end
   end
 
+  def x_o_from_status
+    if self.status == "empty"
+      return "empty"
+    else
+      return (User.find(self.status)).x_or_o
+    end
+  end
+
 end

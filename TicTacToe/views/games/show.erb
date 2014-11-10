@@ -3,7 +3,11 @@
 
 <div class="board">
   <% @game.boardspaces.each do |boardspace| %>
-    <div class="boardspace myturn<%=current_user.my_turn%>" id="<%= boardspace.position %>">
+    <div class="boardspace <%=current_user.players[0].first%>" id="<%= boardspace.position %>">
+      <div class="<%= boardspace.x_o_from_status %>"></div>
+      <% if boardspace.x_o_from_status == "X" %>
+        <div class="XR"></div>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -19,6 +19,13 @@ class GamesController < ApplicationController
     erb :'/games/join'
   end
 
+  get '/join/:id' do
+    authenticate!
+    id = params[:id]
+    current_user.join_game(id)
+    redirect "/games/#{id}"
+  end
+
   get '/resume' do
     authenticate!
     if current_user.games.count == 1
