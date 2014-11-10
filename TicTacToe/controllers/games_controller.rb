@@ -14,7 +14,11 @@ class GamesController < ApplicationController
   end
 
   post '/' do
-    current_user.start_game
+    content_type :json
+    first = params[:first]
+    current_user.start_game(first)
+    username = current_user.username
+    {username: username}.to_json
   end
 
 end

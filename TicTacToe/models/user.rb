@@ -17,14 +17,12 @@ class User < ActiveRecord::Base
     self.find_by(username: username).id
   end
 
-  def start_game
+  def start_game(first)
     game = Game.create
     9.times do |i|
       Boardspace.create({game_id: game.id, position: i})
     end
-    puts "Do you want to go first?  true/false"
-    answer = gets.chomp
-    Player.create({user_id: self.id, game_id: game.id, first: answer})
+    Player.create({user_id: self.id, game_id: game.id, first: first})
   end
 
   def delete_game(game_id)
