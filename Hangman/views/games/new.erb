@@ -1,6 +1,6 @@
 <div class="scoreboard">
-  <h2>SCORE</h2>
-  <h3>100000</h3>
+  <h4>Your Score:</h4>
+  <h2>100000</h2>
 </div>
 
 <div id="<%=@game.id%>" class="gallows_container">
@@ -43,6 +43,7 @@
   var $elapsedSeconds = 0;
   var $score = 1000000;
   var $gameID = $('.gallows_container')[0].id;
+  var $blanks = $('a');
 
   function hideLetter(e){
     $(this).css('visibility', 'hidden');
@@ -125,8 +126,9 @@
   }
 
   function loseGame(word,game_url){
-    var word = word
-    var game_url = game_url
+    clearInterval(refreshIntervalId);
+    var word = word;
+    var game_url = game_url;
     $.each($formLetter, function(index, value){
       $(value.firstElementChild).css("visibility", "hidden")
     });
@@ -141,8 +143,9 @@
   }
 
   function winGame(word,game_url){
-    var word = word
-    var game_url = game_url
+    clearInterval(refreshIntervalId);
+    var word = word;
+    var game_url = game_url;
     $.each($formLetter, function(index, value){
       $(value.firstElementChild).css("visibility", "hidden")
     });
@@ -196,10 +199,9 @@
 
   $(function(){
 
-    var $blanks = $('a');
     var whereCorrect = [];
 
-    setInterval(function(){updateScore();}, 1000);
+    refreshIntervalId = setInterval(function(){updateScore();}, 1000);
 
     $formLetter.on('submit', function(e,hide){
       e.preventDefault();
@@ -222,6 +224,11 @@
     });
 
     $('.letter-button').on('click', hideLetter)
+
+    $blanks.on('click', function(e){
+      e.preventDefault();
+    })
+
   });
 
 </script>

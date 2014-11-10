@@ -10,8 +10,17 @@ form.nav {
 
 .scoreboard {
   position: absolute;
-  right: 12%;
-  font-size: 1.2em;
+  left: 17%;
+  font-size: 1.7em;
+  color: blue;
+}
+
+.scoreboard h4 {
+  margin-bottom: 0;
+}
+
+.scoreboard h2 {
+  margin-top: 0.3em;
 }
 
 h1.you_lose {
@@ -59,7 +68,7 @@ div.gallows_container div {
 div div.letterbox {
   position: absolute;
   background-color: lightgreen;
-  top: 12%;
+  top: 30%;
   left: 7%;
   width: 30%;
 }
@@ -272,11 +281,6 @@ td.space {
   width: 0.2em;
 }
 
-.blanks a {
-  text-decoration: none;
-  color: black;
-}
-
 td.blank {
   border-bottom: 5px solid black;
 }
@@ -284,4 +288,7 @@ td.blank {
 .blanks a {
   display: inline-block;
   width: 60px;
+  text-decoration: none;
+  color: black;
+  cursor: default;
 }
