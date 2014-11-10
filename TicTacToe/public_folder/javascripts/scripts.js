@@ -60,6 +60,7 @@ $(function(){
   var $firstOrSecond = $('.first_or_second');
   var $joinGame = $('.join_game');
   var $resumeGame = $('.resume_game');
+  var $boardspaces = $('.boardspace')
 
   $newGame.on('submit', function(e){
     e.preventDefault();
@@ -79,6 +80,10 @@ $(function(){
     var starterOrJoiner = "joiner";
     var gameID = (this).id;
     multipleGameCheck(starterOrJoiner, gameID);
+  })
+
+  $boardspaces.on('click', function(e){
+    alert("hi");
   })
 
 })

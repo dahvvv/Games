@@ -43,4 +43,26 @@ class User < ActiveRecord::Base
   def x_or_o
     self.players[0].first == true ? "X" : "O"
   end
+
+  def my_turn
+    if self.players != []
+      if (self.players[0].first == true) && (self.occupied_boardspaces.odd? == false)
+        return true
+      elsif (self.players[0].first == false) && (self.occupied_boardspaces.odd? == true)
+        return true
+      else
+        return false
+      end
+    else
+      return "u fucked up"
+    end
+  end
+
+  def occupied_boardspaces
+    if self.games != []
+      self.games[0].boardspaces.where.not(status: 'empty').count
+    else
+      return "how did this happen??"
+    end
+  end
 end
