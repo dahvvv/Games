@@ -7,5 +7,6 @@ Dir.glob("./{helpers,models,controllers}/*.rb").each do |file|
 end
 
 map('/users'){ run UsersController }
-map ('/sessions'){ run SessionsController }
+map('/sessions'){ run SessionsController }
+map('/games'){ run GamesController }
 map('/'){ run ApplicationController }

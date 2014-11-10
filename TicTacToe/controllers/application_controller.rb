@@ -25,9 +25,4 @@ class ApplicationController < Sinatra::Base
     binding.pry
   end
 
-  get '/auth' do
-    authenticate!
-    "ooooooooooooo!"
-  end
-
 end

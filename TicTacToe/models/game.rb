@@ -11,5 +11,3 @@ end
 
 
 # has whose_turn which is a user_id, begins empty
-
-# add first boolean to players

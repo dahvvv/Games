@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   def start_game
     if self.games.count > 0
-      puts "you can't run more than one game at a time!"
+      puts "You can't play more than one game at a time!"
     else
       game = Game.create
       9.times do |i|
@@ -43,8 +43,8 @@ class User < ActiveRecord::Base
           game = opponent_user.games[0]
           if game.players.count == 1
             if game.users[0].id != self.id
-              opponent = game.players[0]
-              player = Player.create({user_id: self.id, game_id: game.id, first: (opponent.first == true ? false : true)})
+              opponent_player = game.players[0]
+              player = Player.create({user_id: self.id, game_id: game.id, first: (opponent_player.first == true ? false : true)})
               game.start
             else
               return "You can't play against yourself!"
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
         return "There is no user registered under that name!"
       end
     else
-      return "You can't run more than one game at a time!"
+      return "You can't play more than one game at a time!"
     end
   end
 
