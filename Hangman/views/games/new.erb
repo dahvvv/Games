@@ -1,16 +1,21 @@
-<div class="gallows">
+<div class="scoreboard">
+  <h2>SCORE</h2>
+  <h3>100000</h3>
+</div>
+
+<div id="<%=@game.id%>" class="gallows_container">
   <%= erb :'/partials/_letterbox' %>
 
-  <div class="beam"></div>
-  <div class="rope"></div>
-  <div class="noose wrongcount"></div>
-  <div class="noosehole wrongcount"></div>
-  <div class="beam_extension"></div>
-  <div class="diagonal">
-    <div id="diag_line"></div>
+  <div class="gallows" id="beam"></div>
+  <div class="gallows" id="rope"></div>
+  <div class="gallows wrongcount" id="noose"></div>
+  <div class="gallows wrongcount" id="noosehole"></div>
+  <div class="gallows" id="beam_extension"></div>
+  <div class="gallows" id="diagonal">
+    <div class="gallows" id="diag_line"></div>
   </div>
-  <div class="pole"></div>
-  <div class="base"></div>
+  <div class="gallows" id="pole"></div>
+  <div class="gallows" id="base"></div>
 
 </div>
 
@@ -32,8 +37,12 @@
 
 <script>
 
-  var $gallows = $(".gallows");
+  var $gallowsContainer = $(".gallows_container");
+  var $gallows = $('.gallows');
   var $formLetter = $("form[id*='Letter']");
+  var $elapsedSeconds = 0;
+  var $score = 1000000;
+  var $gameID = $('.gallows_container')[0].id;
 
   function hideLetter(e){
     $(this).css('visibility', 'hidden');
@@ -71,6 +80,8 @@
         var wrongCount = json.wrong_count
         var inWord = json.in_word
         var won = json.won
+        var word = json.word
+        var game_url = json.game_url
 
         if (wrongCount===1){
           changeNooseIntoFace(wrongCount);          
@@ -79,10 +90,10 @@
           addBodyPart(wrongCount);
         }
         if (won==false){
-          loseGame();
+          loseGame(word,game_url);
         }
         if (won==true){
-          winGame();
+          winGame(word,game_url);
         }
       }
     });
@@ -91,6 +102,7 @@
   function changeNooseIntoFace(wrongCount){
     var $div = $("div[class*='wrongcount']");
     $div[0].className = ("wrongcount" + wrongCount);
+    $div[0].id = "";
     addFacialFeatures();
   }
 
@@ -101,18 +113,20 @@
     $lefteye.addClass("lefteye");
     $righteye.addClass("righteye");
     $mouth.addClass("mouth");
-    $gallows.append($lefteye);
-    $gallows.append($righteye);
-    $gallows.append($mouth);
+    $gallowsContainer.append($lefteye);
+    $gallowsContainer.append($righteye);
+    $gallowsContainer.append($mouth);
   }
 
   function addBodyPart(wrongCount){
     var $div = $("<div>");
     $div.addClass("wrongcount" + wrongCount);
-    $gallows.append($div);
+    $gallowsContainer.append($div);
   }
 
-  function loseGame(){
+  function loseGame(word,game_url){
+    var word = word
+    var game_url = game_url
     $.each($formLetter, function(index, value){
       $(value.firstElementChild).css("visibility", "hidden")
     });
@@ -121,11 +135,14 @@
     $h1.text("YOU LOSE :(");
     $('body').append($h1);
     
+    learnMoreButton(word,game_url);
     playAgainButton();
 
   }
 
-  function winGame(){
+  function winGame(word,game_url){
+    var word = word
+    var game_url = game_url
     $.each($formLetter, function(index, value){
       $(value.firstElementChild).css("visibility", "hidden")
     });
@@ -134,6 +151,7 @@
     $h1.text("YOU WIN!!!!");
     $('body').append($h1);
 
+    learnMoreButton(word,game_url);
     playAgainButton();
 
   }
@@ -141,20 +159,47 @@
   function playAgainButton(){
     var $button = $("<button>");
     var $a = $("<a>");
-    $a.text("PLAY AGAIN?");
+    $a.text("Play again!");
     $a.attr("href", "/games/new");
     $button.addClass("play_again");
     $button.append($a);
     $('body').append($button);
   }
 
+  function learnMoreButton(word,game_url){
+    var $button = $("<button>");
+    var $a = $("<a>");
+    $a.text("Learn about the " + word + "!");
+    $a.attr("href", game_url);
+    $a.attr("target", "_blank");
+    $button.addClass("learn_more");
+    $button.append($a);
+    $('body').append($button);
+  }
 
-
+  function updateScore(){
+    $elapsedSeconds = $elapsedSeconds + 1
+    $.ajax({
+      method: 'PATCH',
+      url: '/games/',
+      dataType: 'json',
+      data: {
+        game_id: $gameID,
+        elapsed_seconds: $elapsedSeconds,
+      },
+      success: function(json){
+        var score = json.score;
+        $('.scoreboard')[0].lastElementChild.innerHTML = score
+      }
+    });
+  }
 
   $(function(){
 
-    var $blanks = $('a')
-    var whereCorrect = []
+    var $blanks = $('a');
+    var whereCorrect = [];
+
+    setInterval(function(){updateScore();}, 1000);
 
     $formLetter.on('submit', function(e,hide){
       e.preventDefault();

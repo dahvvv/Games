@@ -8,6 +8,12 @@ form.nav {
   display: inline;
 }
 
+.scoreboard {
+  position: absolute;
+  right: 12%;
+  font-size: 1.2em;
+}
+
 h1.you_lose {
   position: absolute;
   width: 100%;
@@ -17,7 +23,7 @@ h1.you_lose {
   color: red;
 }
 
-button.play_again {
+button.learn_more {
   background: transparent;
   border: none;
   font-size: 2.5em;
@@ -28,13 +34,24 @@ button.play_again {
   top: 58%;
 }
 
-div.gallows {
+button.play_again {
+  background: transparent;
+  border: none;
+  font-size: 2.5em;
+  color: blue;
+  font-weight: bold;
+  position: absolute;
+  left: 12%;
+  top: 68%;
+}
+
+div.gallows_container {
   position: relative;
   width: 100%;
   height: 32em;
 }
 
-div.gallows div {
+div.gallows_container div {
   position: absolute;
   background-color: black;
 }
@@ -59,14 +76,14 @@ div.letterbox input {
   width: 53px;
 }
 
-div.beam {
+div#beam {
   bottom: 90%;
   height: 5%;
   width: 12%;
   left: 44.5%;
 }
 
-div div.rope {
+div div#rope {
   background-color: tan;
   bottom: 80%;
   height: 10%;
@@ -74,7 +91,7 @@ div div.rope {
   left: 58.25%;
 }
 
-div div.noose {
+div div#noose {
   background-color: tan;
   bottom: 66%;
   height: 75px;
@@ -85,7 +102,7 @@ div div.noose {
   border-radius: 50px / 75px;
 }
 
-div div.noosehole {
+div div#noosehole {
   background-color: lightgreen;
   bottom: 68%;
   height: 57px;
@@ -96,7 +113,7 @@ div div.noosehole {
   border-radius: 50px / 57px;  
 }
 
-div.beam_extension {
+div#beam_extension {
   bottom: 90%;
   height: 5%;
   width: 5%;
@@ -104,7 +121,7 @@ div.beam_extension {
   border-radius: 1em;
 }
 
-div.diagonal {
+div#diagonal {
   bottom: 90%;
   height: 5%;
   width: 2.5%;
@@ -122,14 +139,14 @@ div #diag_line {
     position: absolute;
 }
 
-div.pole {
+div#pole {
   bottom: 7%;
   height: 83%;
   width: 2.5%;
   left: 42%;
 }
 
-div.base {
+div#base {
   bottom: 2%;
   height: 5%;
   width: 12%;

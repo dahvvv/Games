@@ -26,7 +26,16 @@ class GuessesController < ApplicationController
       game.save!
     end
 
-    {letter: guess.letter, in_word: guess.in_word, order: order_array, id: guess.id, wrong_count: wrong_count, won: game.won}.to_json
+    {
+      wrong_count: wrong_count,
+      in_word: guess.in_word,
+      won: game.won,
+      word: game.word,
+      game_url: game.url,
+      letter: guess.letter,
+      order: order_array,
+      id: guess.id,
+    }.to_json
   end
 
 end
